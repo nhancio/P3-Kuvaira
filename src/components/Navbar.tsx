@@ -96,6 +96,12 @@ const Navbar = () => {
             >
               Contact Us
             </button>
+            <button 
+              onClick={() => navigate('/blogs')}
+              className="px-4 py-2 rounded-full text-black hover:bg-black/10 transition-all duration-300"
+            >
+              Blogs
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -139,6 +145,12 @@ const Navbar = () => {
               className="px-4 py-2 rounded-md text-black hover:bg-black/10 transition-all duration-300"
             >
               Contact Us
+            </button>
+            <button 
+              onClick={() => { setIsOpen(false); navigate('/blogs'); }}
+              className="px-4 py-2 rounded-md text-black hover:bg-black/10 transition-all duration-300"
+            >
+              Blogs
             </button>
           </div>
         </div>

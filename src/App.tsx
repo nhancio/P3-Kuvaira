@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import Portfolio from "./pages/Portfolio";
 import NotFound from "./pages/NotFound";
 import { MotionConfig } from "framer-motion";
+import BlogList from "./components/BlogList";
+import BlogDetail from "./components/BlogDetail";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +22,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/blogs" element={<BlogList />} />
+            <Route path="/blogs/:id" element={<BlogList />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

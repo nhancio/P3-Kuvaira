@@ -58,61 +58,75 @@ const testimonials = [
   }
 ];
 
-// Add partners data
-const partners = [
+// Add clients data
+const clients = [
   {
     id: 1,
-    name: "Crafts by Shravs",
-    description: "Inhouse Design Studio",
-    logo: "/logo/cbs-logo.png"  // Update path based on your image location
+    name: "Jubilee Hills",
+    logo: "/clients/JUBILEE HILLS (5).png"
   },
   {
     id: 2,
-    name: "Reel Sync Studio",
-    description: "Media Production Partner",
-    logo: "/logo/reelsync-logo.png"  // Updated this line
+    name: "Nhancio",
+    logo: "/clients/nhancio-logo.png"
   },
   {
     id: 3,
-    name: "Nhancio",
-    description: "Technology Partner",
-    logo: "/logo/nhancio-logo.png"  // Update path based on your image location
+    name: "TidyTouch",
+    logo: "/clients/Tidytouch logo-1.png"
+  },
+  {
+    id: 4,
+    name: "Client 4",
+    logo: "/clients/WhatsApp Image 2025-10-18 at 17.33.31.jpeg"
+  },
+  {
+    id: 5,
+    name: "Client 5",
+    logo: "/clients/WhatsApp Image 2025-10-18 at 17.33.33.jpeg"
   }
 ];
 
-const PartnersSection = () => (
-  <section className="py-16">
+const ClientsSection = () => (
+  <section className="pt-8 pb-16 bg-gray-50">
     <div className="container mx-auto px-4 md:px-6">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-serif font-semibold mb-4">Our Partners</h2>
+        <h2 className="text-3xl md:text-5xl font-serif font-semibold mb-4">Our Clients</h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Collaborating with the best to deliver exceptional gifting experiences.
+          Trusted by leading organizations for their corporate gifting needs.
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {partners.map((partner) => (
-          <motion.div
-            key={partner.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="bg-white p-8 rounded-lg shadow-sm border border-border text-center"
-          >
-            {partner.logo && (
-              <div className="mb-4 flex justify-center">
-                <img 
-                  src={partner.logo} 
-                  alt={`${partner.name} logo`}
-                  className="h-16 w-auto object-contain"
-                />
-              </div>
-            )}
-            <h3 className="text-xl font-serif font-medium mb-2">{partner.name}</h3>
-            <p className="text-muted-foreground">{partner.description}</p>
-          </motion.div>
-        ))}
+      {/* Smooth scrolling carousel */}
+      <div className="relative overflow-hidden">
+        <div className="flex animate-scroll">
+          {/* First set of logos */}
+          {clients.map((client) => (
+            <div
+              key={client.id}
+              className="flex-shrink-0 mx-8 flex items-center justify-center"
+            >
+              <img 
+                src={client.logo} 
+                alt={`${client.name} logo`}
+                className="h-32 w-auto object-contain hover:scale-110 hover:shadow-lg transition-all duration-300"
+              />
+            </div>
+          ))}
+          {/* Duplicate set for seamless loop */}
+          {clients.map((client) => (
+            <div
+              key={`duplicate-${client.id}`}
+              className="flex-shrink-0 mx-8 flex items-center justify-center"
+            >
+              <img 
+                src={client.logo} 
+                alt={`${client.name} logo`}
+                className="h-32 w-auto object-contain hover:scale-110 hover:shadow-lg transition-all duration-300"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -275,8 +289,8 @@ const Index = () => {
         <Contact />
       </section>
       
-      {/* Partners Section */}
-      <PartnersSection />
+      {/* Clients Section */}
+      <ClientsSection />
       
       <Footer />
     </div>

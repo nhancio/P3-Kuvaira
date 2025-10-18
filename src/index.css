@@ -145,4 +145,18 @@
   .section-subtitle {
     @apply text-xl md:text-2xl font-medium text-muted-foreground mb-12;
   }
+
+  /* Smooth scrolling animation for client logos */
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }

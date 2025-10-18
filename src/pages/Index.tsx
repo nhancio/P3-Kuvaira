@@ -68,7 +68,7 @@ const clients = [
   {
     id: 2,
     name: "Nhancio",
-    logo: "/clients/nhancio-logo.png"
+    logo: "/clients/Nhancio-logo.png"
   },
   {
     id: 3,
@@ -77,12 +77,17 @@ const clients = [
   },
   {
     id: 4,
-    name: "Client 4",
-    logo: "/clients/WhatsApp Image 2025-10-18 at 17.33.31.jpeg"
+    name: "Halmark",
+    logo: "/clients/Halmark_logo-01.png"
   },
   {
     id: 5,
     name: "Client 5",
+    logo: "/clients/WhatsApp Image 2025-10-18 at 17.33.31.jpeg"
+  },
+  {
+    id: 6,
+    name: "Client 6",
     logo: "/clients/WhatsApp Image 2025-10-18 at 17.33.33.jpeg"
   }
 ];

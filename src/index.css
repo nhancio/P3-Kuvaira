@@ -148,7 +148,7 @@
 
   /* Smooth scrolling animation for client logos */
   .animate-scroll {
-    animation: scroll 30s linear infinite;
+    animation: scroll 15s linear infinite;
   }
 
   @keyframes scroll {
@@ -157,6 +157,18 @@
     }
     100% {
       transform: translateX(-50%);
+    }
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .animate-scroll {
+      animation: scroll 13s linear infinite;
+    }
+    
+    /* Ensure proper touch scrolling on mobile */
+    .overflow-hidden {
+      -webkit-overflow-scrolling: touch;
     }
   }
 }

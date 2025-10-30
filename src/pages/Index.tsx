@@ -95,26 +95,26 @@ const clients = [
 const ClientsSection = () => (
   <section className="pt-8 pb-16 bg-gray-50">
     <div className="container mx-auto px-4 md:px-6">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-serif font-semibold mb-4">Our Clients</h2>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+      <div className="text-center mb-8 md:mb-12">
+        <h2 className="text-2xl md:text-3xl lg:text-5xl font-serif font-semibold mb-4">Our Clients</h2>
+        <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
           Trusted by leading organizations for their corporate gifting needs.
         </p>
       </div>
       
       {/* Smooth scrolling carousel */}
-      <div className="relative overflow-hidden">
-        <div className="flex animate-scroll">
+      <div className="relative overflow-hidden w-full">
+        <div className="flex animate-scroll w-max">
           {/* First set of logos */}
           {clients.map((client) => (
             <div
               key={client.id}
-              className="flex-shrink-0 mx-8 flex items-center justify-center"
+              className="flex-shrink-0 mx-4 md:mx-8 flex items-center justify-center"
             >
               <img 
                 src={client.logo} 
                 alt={`${client.name} logo`}
-                className="h-32 w-auto object-contain hover:scale-110 hover:shadow-lg transition-all duration-300"
+                className="h-20 md:h-32 w-auto object-contain hover:scale-110 hover:shadow-lg transition-all duration-300"
               />
             </div>
           ))}
@@ -122,12 +122,12 @@ const ClientsSection = () => (
           {clients.map((client) => (
             <div
               key={`duplicate-${client.id}`}
-              className="flex-shrink-0 mx-8 flex items-center justify-center"
+              className="flex-shrink-0 mx-4 md:mx-8 flex items-center justify-center"
             >
               <img 
                 src={client.logo} 
                 alt={`${client.name} logo`}
-                className="h-32 w-auto object-contain hover:scale-110 hover:shadow-lg transition-all duration-300"
+                className="h-20 md:h-32 w-auto object-contain hover:scale-110 hover:shadow-lg transition-all duration-300"
               />
             </div>
           ))}
@@ -148,16 +148,16 @@ const Index = () => {
       </section>
       
       {/* Portfolio Section */}
-      <section id="portfolio-section" className="py-24">
+      <section id="portfolio-section" className="py-12 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12">
-            <div>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12">
+            <div className="mb-4 md:mb-0">
               <motion.h2 
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                className="text-3xl md:text-5xl font-serif font-semibold mb-4"
+                className="text-2xl md:text-3xl lg:text-5xl font-serif font-semibold mb-4"
               >
                 Our Portfolio
               </motion.h2>
@@ -166,7 +166,7 @@ const Index = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 viewport={{ once: true }}
-                className="text-lg text-muted-foreground max-w-xl"
+                className="text-base md:text-lg text-muted-foreground max-w-xl"
               >
                 Explore our most popular corporate gifting collections, designed to impress.
               </motion.p>
@@ -177,9 +177,9 @@ const Index = () => {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <Link to="/portfolio" className="text-primary font-medium flex items-center gap-2 hover:underline">
+              <Link to="/portfolio" className="text-primary font-medium flex items-center gap-2 hover:underline text-sm md:text-base">
                 <span>View All Collections</span>
-                <ArrowRight size={18} />
+                <ArrowRight size={16} className="md:w-[18px] md:h-[18px]" />
               </Link>
             </motion.div>
           </div>
@@ -200,23 +200,23 @@ const Index = () => {
       </section>
       
       {/* About Us Section */}
-      <section id="about-section" className="py-20 bg-pastel-mint/30">
+      <section id="about-section" className="py-12 md:py-20 bg-pastel-mint/30">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-serif font-semibold mb-4">About Us</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl md:text-3xl lg:text-5xl font-serif font-semibold mb-4">About Us</h2>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Discovered in the meaning of "Kuvaira"—the truly unique and rare—our signature touch transforms the art of giving into an emotional journey. Each handcrafted gift carries warmth that lingers long after the moment passes, blending luxurious elements with personal sentiment that speaks directly to the heart. In a world of fleeting exchanges, we craft lasting impressions through packages that tell sophisticated stories. Kuvaira doesn't simply deliver gifts; we create unforgettable experiences where every gesture is not just exchanged, but deeply felt.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {/* Feature 1 */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
+              className="bg-white p-6 md:p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
             >
               <div className="w-16 h-16 rounded-full bg-pastel-lavender flex items-center justify-center mx-auto mb-6">
                 <Gift size={28} className="text-primary" />
@@ -233,7 +233,7 @@ const Index = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
+              className="bg-white p-6 md:p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
             >
               <div className="w-16 h-16 rounded-full bg-pastel-pink flex items-center justify-center mx-auto mb-6">
                 <Package size={28} className="text-primary" />
@@ -250,7 +250,7 @@ const Index = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
+              className="bg-white p-6 md:p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
             >
               <div className="w-16 h-16 rounded-full bg-pastel-blue flex items-center justify-center mx-auto mb-6">
                 <Clock size={28} className="text-primary" />
@@ -267,7 +267,7 @@ const Index = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
+              className="bg-white p-6 md:p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center"
             >
               <div className="w-16 h-16 rounded-full bg-pastel-peach flex items-center justify-center mx-auto mb-6">
                 <Users size={28} className="text-primary" />
@@ -284,9 +284,9 @@ const Index = () => {
       {/* Contact Section */}
       <section id="contact-section">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-8">
-            <h2 className="text-4xl md:text-6xl font-serif font-semibold mb-4">Contact Us</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center mb-6 md:mb-8">
+            <h2 className="text-2xl md:text-4xl lg:text-6xl font-serif font-semibold mb-4">Contact Us</h2>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
               Get in touch with us to discuss your corporate gifting needs.
             </p>
           </div>

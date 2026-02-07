@@ -2,39 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import HeroCarousel from '@/components/HeroCarousel';
-import GiftCard from '@/components/GiftCard';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Contact from '@/components/Contact';
-import { Gift, Clock, Package, Users, ArrowRight, Star } from 'lucide-react';
-
-// Featured products data
-const featuredProducts = [
-  {
-    id: "1",
-    image: "/images/festive-gift-1.jpeg",
-    title: "Diwali Special Box",
-    category: "Festive"
-  },
-  {
-    id: "2",
-    image: "/images/onboarding-gift-1.jpeg",
-    title: "Welcome Kit Premium",
-    category: "Onboarding"
-  },
-  {
-    id: "3",
-    image: "/images/electronic-gift-1.jfif",
-    title: "Tech Essentials Pack",
-    category: "Electronic Gadgets"
-  },
-  {
-    id: "4",
-    image: "/images/hamper-1.jpeg",
-    title: "Gourmet Delight Hamper",
-    category: "Hampers"
-  }
-];
+import { Gift, Clock, Package, Users, ArrowRight } from 'lucide-react';
 
 // Testimonials data
 const testimonials = [
@@ -56,6 +27,52 @@ const testimonials = [
     author: "Ananya Desai",
     position: "CEO, Innovate Studios"
   }
+];
+
+// Our Collections with taglines
+const collections = [
+  {
+    id: 'onboarding',
+    name: 'First Impressions',
+    category: 'Onboarding',
+    taglines: ['Welcome them right.', 'First days matter.'],
+    image: '/images/onboarding.jpeg',
+  },
+  {
+    id: 'festive',
+    name: 'Festive Favourites',
+    category: 'Festive',
+    taglines: ['Festive. Done better.', 'Not the usual.'],
+    image: '/images/festive-gift-1.jpeg',
+  },
+  {
+    id: 'client',
+    name: 'Client Privileges',
+    category: 'Client Gifting',
+    taglines: ['Respect, delivered.', 'Loyalty starts here.'],
+    image: '/images/corporate-gift-2.jpeg',
+  },
+  {
+    id: 'custom',
+    name: 'Signature Customs',
+    category: 'Custom Made',
+    taglines: ['Made your way.', 'No templates.'],
+    image: '/images/customade.jpeg',
+  },
+  {
+    id: 'wedding',
+    name: 'Wedding Keepsakes',
+    category: 'Return Gifts',
+    taglines: ['Remembered forever.', 'Worth keeping.'],
+    image: '/images/gifts.jpeg',
+  },
+  {
+    id: 'electronic',
+    name: 'Smart Essentials',
+    category: 'Electronic Gadgets',
+    taglines: ['Use it daily.', 'Smart gifting.'],
+    image: '/images/electronic-gift-1.jfif',
+  },
 ];
 
 // Add clients data
@@ -101,7 +118,7 @@ const ClientsSection = () => (
           Trusted by leading organizations for their corporate gifting needs.
         </p>
       </div>
-      
+
       {/* Smooth scrolling carousel */}
       <div className="relative overflow-hidden w-full">
         <div className="flex animate-scroll w-max">
@@ -111,8 +128,8 @@ const ClientsSection = () => (
               key={client.id}
               className="flex-shrink-0 mx-4 md:mx-8 flex items-center justify-center"
             >
-              <img 
-                src={client.logo} 
+              <img
+                src={client.logo}
                 alt={`${client.name} logo`}
                 className="h-20 md:h-32 w-auto object-contain hover:scale-110 hover:shadow-lg transition-all duration-300"
               />
@@ -124,8 +141,8 @@ const ClientsSection = () => (
               key={`duplicate-${client.id}`}
               className="flex-shrink-0 mx-4 md:mx-8 flex items-center justify-center"
             >
-              <img 
-                src={client.logo} 
+              <img
+                src={client.logo}
                 alt={`${client.name} logo`}
                 className="h-20 md:h-32 w-auto object-contain hover:scale-110 hover:shadow-lg transition-all duration-300"
               />
@@ -141,64 +158,124 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section id="home-section" className="relative">
         <HeroCarousel />
       </section>
-      
-      {/* Portfolio Section */}
-      <section id="portfolio-section" className="py-12 md:py-24">
+
+      {/* Our Collections */}
+      <section id="portfolio-section" className="py-12 md:py-24 bg-gray-50/50">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12">
-            <div className="mb-4 md:mb-0">
-              <motion.h2 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-                className="text-2xl md:text-3xl lg:text-5xl font-serif font-semibold mb-4"
-              >
-                Our Portfolio
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                viewport={{ once: true }}
-                className="text-base md:text-lg text-muted-foreground max-w-xl"
-              >
-                Explore our most popular corporate gifting collections, designed to impress.
-              </motion.p>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+          <div className="text-center mb-12">
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
+              className="text-2xl md:text-3xl lg:text-5xl font-serif font-semibold mb-4"
             >
-              <Link to="/portfolio" className="text-primary font-medium flex items-center gap-2 hover:underline text-sm md:text-base">
-                <span>View All Collections</span>
-                <ArrowRight size={16} className="md:w-[18px] md:h-[18px]" />
-              </Link>
-            </motion.div>
+              Our Collections
+            </motion.h2>
           </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product, index) => (
-              <GiftCard
-                key={product.id}
-                id={product.id}
-                image={product.image}
-                title={product.title}
-                category={product.category}
-                delay={index}
-              />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
+            {collections.map((col, index) => (
+              <motion.div
+                key={col.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                viewport={{ once: true }}
+              >
+                <Link to="/portfolio" className="block bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all h-full">
+                  <div className="aspect-[4/3] relative">
+                    <img src={col.image} alt={col.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="p-5">
+                    <p className="text-sm text-primary font-medium mb-1">{col.category}</p>
+                    <h3 className="font-serif font-semibold text-lg mb-2">{col.name}</h3>
+                    <p className="text-sm text-muted-foreground italic">
+                      {col.taglines.join(' ')}
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
+          </div>
+          <div className="text-center">
+            <Link to="/portfolio" className="text-primary font-medium inline-flex items-center gap-2 hover:underline">
+              <span>View All Collections</span>
+              <ArrowRight size={18} />
+            </Link>
           </div>
         </div>
       </section>
-      
+
+      {/* You think about gifting. We think about everything else. */}
+      <section className="py-12 md:py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-lg md:text-xl text-muted-foreground mb-4"
+            >
+              You think about gifting.
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-2xl md:text-3xl lg:text-5xl font-serif font-semibold mb-10"
+            >
+              We think about everything else.
+            </motion.h2>
+            <motion.ul
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="space-y-3 text-base md:text-lg text-muted-foreground text-left max-w-md mx-auto"
+            >
+              <li>From selecting products</li>
+              <li>To matching personalities</li>
+              <li>To packaging with care</li>
+              <li>To delivering on time</li>
+            </motion.ul>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="mt-10 text-lg md:text-xl font-medium"
+            >
+              So when it reaches them…
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              viewport={{ once: true }}
+              className="text-2xl md:text-3xl font-serif font-semibold text-primary"
+            >
+              It feels special.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="text-base md:text-lg text-muted-foreground"
+            >
+              Every single time.
+            </motion.p>
+          </div>
+        </div>
+      </section>
+
       {/* About Us Section */}
       <section id="about-section" className="py-12 md:py-20 bg-pastel-mint/30">
         <div className="container mx-auto px-4 md:px-6">
@@ -208,10 +285,10 @@ const Index = () => {
               Discovered in the meaning of "Kuvaira"—the truly unique and rare—our signature touch transforms the art of giving into an emotional journey. Each handcrafted gift carries warmth that lingers long after the moment passes, blending luxurious elements with personal sentiment that speaks directly to the heart. In a world of fleeting exchanges, we craft lasting impressions through packages that tell sophisticated stories. Kuvaira doesn't simply deliver gifts; we create unforgettable experiences where every gesture is not just exchanged, but deeply felt.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {/* Feature 1 */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -226,9 +303,9 @@ const Index = () => {
                 Carefully curated high-quality products that leave a lasting impression.
               </p>
             </motion.div>
-            
+
             {/* Feature 2 */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -243,9 +320,9 @@ const Index = () => {
                 Bespoke packaging solutions tailored to your brand identity.
               </p>
             </motion.div>
-            
+
             {/* Feature 3 */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -260,9 +337,9 @@ const Index = () => {
                 Efficient logistics ensuring your gifts arrive exactly when needed.
               </p>
             </motion.div>
-            
+
             {/* Feature 4 */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -280,23 +357,85 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
-      {/* Contact Section */}
+
+      {/* We Fix Your Gifting Decisions */}
+      <section className="py-16 md:py-24 bg-pastel-lavender/20">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-center mb-10"
+            >
+              <span className="text-sm font-medium tracking-wide text-primary uppercase">
+                How we help
+              </span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              viewport={{ once: true }}
+              className="text-2xl md:text-3xl lg:text-4xl font-serif font-semibold text-center text-foreground mb-12"
+            >
+              We Fix Your Gifting Decisions
+            </motion.h2>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-background rounded-2xl border border-border shadow-sm p-8 md:p-10 mb-10"
+            >
+              <div className="text-center space-y-4 mb-8">
+                <p className="text-base md:text-lg text-muted-foreground">
+                  You come with: <span className="font-medium text-foreground">&ldquo;I need gifts.&rdquo;</span>
+                </p>
+                <p className="text-base md:text-lg font-medium text-primary">
+                  We turn it into: <span className="italic">&ldquo;This is perfect.&rdquo;</span>
+                </p>
+              </div>
+              <p className="text-center text-muted-foreground text-sm md:text-base mb-5">
+                By understanding:
+              </p>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md mx-auto">
+                {['Your purpose', 'Your budget', 'Your people', 'Your image'].map((item, i) => (
+                  <motion.li
+                    key={item}
+                    initial={{ opacity: 0, x: -8 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.15 + i * 0.05 }}
+                    viewport={{ once: true }}
+                    className="flex items-center gap-3 text-muted-foreground"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" aria-hidden />
+                    <span>{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Start Your Gifting Journey Section */}
       <section id="contact-section">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-6 md:mb-8">
-            <h2 className="text-2xl md:text-4xl lg:text-6xl font-serif font-semibold mb-4">Contact Us</h2>
+            <h2 className="text-2xl md:text-4xl lg:text-6xl font-serif font-semibold mb-4">Start Your Gifting Journey</h2>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Get in touch with us to discuss your corporate gifting needs.
+              Tell us who you're gifting and why—we'll take care of the rest.
             </p>
           </div>
         </div>
         <Contact />
       </section>
-      
+
       {/* Clients Section */}
       <ClientsSection />
-      
+
       <Footer />
     </div>
   );

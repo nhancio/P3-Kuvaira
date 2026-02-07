@@ -8,9 +8,8 @@ const Contact = () => {
     {
       icon: <MapPin size={24} className="text-primary" />,
       title: "Our Location",
-      details: [
-        <a 
-          key="address"
+      content: (
+        <a
           href="https://maps.app.goo.gl/z2DUUC4pezxmpxS59"
           target="_blank"
           rel="noopener noreferrer"
@@ -18,17 +17,25 @@ const Contact = () => {
         >
           Tulip-D, Star Homes, IDPL, Balanagar, Hyderabad-500054
         </a>
-      ]
+      )
     },
     {
       icon: <Phone size={24} className="text-primary" />,
       title: "Phone Number",
-      details: ["+91 63044 08747"]
+      content: (
+        <a href="tel:+916304408747" className="text-muted-foreground hover:text-primary transition-colors">
+          +91 63044 08747
+        </a>
+      )
     },
     {
       icon: <Mail size={24} className="text-primary" />,
       title: "Email Address",
-      details: ["shravya@kuvaira.in"]
+      content: (
+        <a href="mailto:shravya@kuvaira.in" className="text-muted-foreground hover:text-primary transition-colors">
+          shravya@kuvaira.in
+        </a>
+      )
     }
   ];
 
@@ -46,12 +53,17 @@ const Contact = () => {
               className="space-y-10"
             >
               <div>
-                <h2 className="text-3xl font-medium mb-6">
-                  Let's Start a Conversation
+                <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-6">
+                  Let's Create Something Special
                 </h2>
-                <p className="text-muted-foreground mb-10">
-                  Whether you have a question about our products, custom orders, or want to discuss a bulk order for your next corporate event, our team is here to help.
+                <p className="text-muted-foreground mb-6">
+                  Tell us who you're gifting. Tell us why. We'll take care of the rest.
                 </p>
+                <div className="mb-10">
+                  <a href="#contact-form" className="btn-primary min-w-[200px] inline-flex justify-center">
+                    Start Your Gifting Journey
+                  </a>
+                </div>
               </div>
               
               <div className="grid grid-cols-1 gap-8">
@@ -61,12 +73,8 @@ const Contact = () => {
                       {item.icon}
                       <h3 className="font-medium text-lg">{item.title}</h3>
                     </div>
-                    <div className="space-y-1">
-                      {item.details.map((detail, i) => (
-                        <p key={i} className="text-muted-foreground">
-                          {detail}
-                        </p>
-                      ))}
+                    <div className="text-muted-foreground">
+                      {item.content}
                     </div>
                   </div>
                 ))}
@@ -76,6 +84,7 @@ const Contact = () => {
           
           {/* Contact Form */}
           <motion.div
+            id="contact-form"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}

@@ -2,103 +2,43 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface Slide {
-  id: number;
-  image: string;
-  title: string;
-  subtitle: string;
-}
 
-const slides: Slide[] = [
-  {
-    id: 1,
-    image: '/images/banner1.jpg',
-    title: 'Exclusive Corporate Gifts',
-    subtitle: 'Thoughtfully curated premium gifts for your business partners'
-  },
-  {
-    id: 2,
-    image: '/images/banner2.jpg',
-    title: 'Bespoke Gift Collections',
-    subtitle: 'Customized gift hampers for every occasion'
-  },
-  {
-    id: 3,
-    image: '/images/banner3.jpg',
-    title: 'Personalized Luxury',
-    subtitle: 'Elegant and personalized gifting solutions'
+
+const primaryButtonAction = () => {
+  const portfolioSection = document.getElementById('portfolio-section');
+  if (portfolioSection) {
+    portfolioSection.scrollIntoView({ behavior: 'smooth' });
   }
-];
+};
+
+const secondaryButtonAction = () => {
+  const contactSection = document.getElementById('contact-section');
+  if (contactSection) {
+    contactSection.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 
 const heroSlides = [
   {
     image: '/images/banner1.jpg',
-    title: 'Exclusive Corporate Gifts',
-    description: 'Thoughtfully curated premium gifts for your business partners',
-    primaryButton: {
-      text: 'Explore Collection',
-      action: () => {
-        const portfolioSection = document.getElementById('portfolio-section');
-        if (portfolioSection) {
-          portfolioSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    },
-    secondaryButton: {
-      text: 'Contact Us',
-      action: () => {
-        const contactSection = document.getElementById('contact-section');
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    }
+    line1: 'Gifts that get remembered.',
+    line2: 'Make every moment unforgettable with our curated selection.',
+    primaryButton: { text: 'Explore Collection', action: primaryButtonAction },
+    secondaryButton: { text: 'Contact Us', action: secondaryButtonAction }
   },
   {
     image: '/images/banner2.jpg',
-    title: 'Bespoke Gift Collections',
-    description: 'Customized gift hampers for every occasion',
-    primaryButton: {
-      text: 'Explore Collection',
-      action: () => {
-        const portfolioSection = document.getElementById('portfolio-section');
-        if (portfolioSection) {
-          portfolioSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    },
-    secondaryButton: {
-      text: 'Contact Us',
-      action: () => {
-        const contactSection = document.getElementById('contact-section');
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    }
+    line1: 'Start Gifting Thoughtfully',
+    line2: 'Find the perfect expression of your appreciation and love.',
+    primaryButton: { text: 'Explore Collection', action: primaryButtonAction },
+    secondaryButton: { text: 'Contact Us', action: secondaryButtonAction }
   },
   {
     image: '/images/banner3.jpg',
-    title: 'Personalized Luxury',
-    description: 'Elegant and personalized gifting solutions',
-    primaryButton: {
-      text: 'Explore Collection',
-      action: () => {
-        const portfolioSection = document.getElementById('portfolio-section');
-        if (portfolioSection) {
-          portfolioSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    },
-    secondaryButton: {
-      text: 'Contact Us',
-      action: () => {
-        const contactSection = document.getElementById('contact-section');
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    }
+    line1: 'Gifts that feel personal.',
+    line2: 'Customized touches that make your thoughtful gesture unique.',
+    primaryButton: { text: 'Explore Collection', action: primaryButtonAction },
+    secondaryButton: { text: 'Contact Us', action: secondaryButtonAction }
   }
 ];
 
@@ -107,11 +47,11 @@ const HeroCarousel = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    setCurrentSlide((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    setCurrentSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
   };
 
   useEffect(() => {
@@ -147,22 +87,24 @@ const HeroCarousel = () => {
           <div className="absolute inset-0 bg-black/30 z-10"></div>
           <img
             src={slide.image}
-            alt={slide.title}
+            alt={slide.line1}
             className="w-full h-full object-cover"
             onLoad={handleImageLoad}
           />
-          
+
           {/* Content */}
           <div className="absolute inset-0 z-20 flex items-center justify-center text-white p-6">
-            <div className="max-w-4xl text-center space-y-6">
+            <div className="max-w-4xl text-center space-y-5 md:space-y-6">
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold leading-tight animate-slide-up">
-                {slide.title}
+                {slide.line1}
               </h1>
-              <p className="text-xl md:text-2xl opacity-90 max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: '0.2s' }}>
-                {slide.description}
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-                <button onClick={slide.primaryButton.action} className="btn-primary min-w-[180px]">
+              {slide.line2 && (
+                <p className="text-xl md:text-2xl lg:text-3xl font-serif font-medium opacity-95 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+                  {slide.line2}
+                </p>
+              )}
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 animate-slide-up" style={{ animationDelay: '0.25s' }}>
+                <button onClick={slide.primaryButton.action} className="btn-primary min-w-[200px]">
                   {slide.primaryButton.text}
                 </button>
                 <button className="btn-outline border-white text-white hover:bg-white hover:text-primary min-w-[180px]" onClick={slide.secondaryButton.action}>
@@ -193,11 +135,10 @@ const HeroCarousel = () => {
         {heroSlides.map((_, index) => (
           <button
             key={index}
-            className={`w-3 h-3 rounded-full transition-all ${
-              currentSlide === index
+            className={`w-3 h-3 rounded-full transition-all ${currentSlide === index
                 ? "bg-white w-10"
                 : "bg-white/50"
-            }`}
+              }`}
             onClick={() => setCurrentSlide(index)}
           />
         ))}

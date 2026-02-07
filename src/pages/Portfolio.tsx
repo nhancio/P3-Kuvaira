@@ -5,9 +5,20 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import GiftCard from '@/components/GiftCard';
 
+// Collection display names and taglines (category value -> display info)
+const collectionInfo: Record<string, { name: string; taglines: string[] }> = {
+  "Onboarding": { name: "First Impressions (Onboarding)", taglines: ["Welcome them right.", "First days matter."] },
+  "Festive": { name: "Festive Favourites", taglines: ["Festive. Done better.", "Not the usual."] },
+  "Client Gifting": { name: "Client Privileges", taglines: ["Respect, delivered.", "Loyalty starts here."] },
+  "Custom Made": { name: "Signature Customs", taglines: ["Made your way.", "No templates."] },
+  "Wedding": { name: "Wedding Keepsakes (Return Gifts)", taglines: ["Remembered forever.", "Worth keeping."] },
+  "Electronic Gadgets": { name: "Smart Essentials", taglines: ["Use it daily.", "Smart gifting."] },
+  "Hampers": { name: "Hampers", taglines: [] },
+  "Gift Sets": { name: "Gift Sets", taglines: [] },
+};
+
 // Portfolio items data
 const portfolioItems = [
-  // Festive Collection
   {
     id: "1",
     image: "/images/festive-gift-1.jpeg",
@@ -20,33 +31,30 @@ const portfolioItems = [
     title: "New Year Celebration Kit",
     category: "Festive"
   },
-  // Wedding Collection
   {
     id: "3",
-    image: "/images/wedding.png",
+    image: "/images/gifts.jpeg",
     title: "Wedding Welcome Kit",
     category: "Wedding"
   },
   {
     id: "4",
-    image: "/images/wedding-2.png",
+    image: "/images/gifts.jpeg",
     title: "Couple Gift Set",
     category: "Wedding"
   },
-  // Onboarding Collection
   {
     id: "5",
-    image: "/images/onboarding-gift-1.jpeg",
+    image: "/images/onboarding.jpeg",
     title: "Welcome Kit Premium",
     category: "Onboarding"
   },
   {
     id: "6",
-    image: "/images/onboarding-gift-2.jpeg",
+    image: "/images/onboarding.jpeg",
     title: "New Joiner Package",
     category: "Onboarding"
   },
-  // Electronic Gadgets
   {
     id: "7",
     image: "/images/electronic-gift-1.jfif",
@@ -59,7 +67,6 @@ const portfolioItems = [
     title: "Smart Workspace Bundle",
     category: "Electronic Gadgets"
   },
-  // Hampers
   {
     id: "9",
     image: "/images/hamper-1.jpeg",
@@ -72,7 +79,6 @@ const portfolioItems = [
     title: "Wellness & Spa Hamper",
     category: "Hampers"
   },
-  // Gift Sets
   {
     id: "11",
     image: "/images/hero-gift-collections.jpeg",
@@ -87,7 +93,7 @@ const portfolioItems = [
   }
 ];
 
-// Get unique categories
+// Get unique categories with "All" first
 const categories = ["All", ...new Set(portfolioItems.map(item => item.category))];
 
 const Portfolio = () => {
@@ -116,11 +122,17 @@ const Portfolio = () => {
     <div className="min-h-screen">
       <Navbar />
       
-      {/* Portfolio Gallery */}
+      {/* Our Collections */}
       <section className="pt-40 py-20">
         <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-10">
+            <h1 className="text-3xl md:text-5xl font-serif font-semibold mb-4">Our Collections</h1>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Explore our curated gift collections. Each one tells a story.
+            </p>
+          </div>
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
             {categories.map((category, index) => (
               <button
                 key={index}
@@ -131,10 +143,18 @@ const Portfolio = () => {
                     : 'bg-muted hover:bg-muted/80'
                 }`}
               >
-                {category}
+                {category === "All" ? "All" : (collectionInfo[category]?.name ?? category)}
               </button>
             ))}
           </div>
+          {/* Taglines when a specific category is selected */}
+          {activeCategory !== "All" && collectionInfo[activeCategory]?.taglines?.length > 0 && (
+            <div className="text-center mb-10">
+              <p className="text-muted-foreground italic">
+                {collectionInfo[activeCategory].taglines.join(' · ')}
+              </p>
+            </div>
+          )}
           
           {/* Gallery Grid */}
           <motion.div 
@@ -160,13 +180,13 @@ const Portfolio = () => {
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-serif font-semibold mb-6">
-              Looking for Something Custom?
+              Let's Create Something Special
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              We specialize in creating bespoke gifts tailored to your specific requirements and brand identity.
+              Tell us who you're gifting. Tell us why. We'll take care of the rest.
             </p>
             <button onClick={handleRequirementsClick} className="btn-primary">
-              Discuss Your Requirements
+              Start Your Gifting Journey
             </button>
           </div>
         </div>

@@ -10,9 +10,8 @@ const Contact = () => {
     {
       icon: <MapPin size={24} className="text-primary" />,
       title: "Our Location",
-      details: [
-        <a 
-          key="address"
+      content: (
+        <a
           href="https://maps.app.goo.gl/z2DUUC4pezxmpxS59"
           target="_blank"
           rel="noopener noreferrer"
@@ -20,17 +19,25 @@ const Contact = () => {
         >
           Tulip-D, Star Homes, IDPL, Balanagar, Hyderabad, Telangana 500054, India
         </a>
-      ]
+      )
     },
     {
       icon: <Phone size={24} className="text-primary" />,
       title: "Phone Number",
-      details: ["+91 63044 087747"]
+      content: (
+        <a href="tel:+916304408747" className="text-muted-foreground hover:text-primary transition-colors">
+          +91 63044 08747
+        </a>
+      )
     },
     {
       icon: <Mail size={24} className="text-primary" />,
       title: "Email Address",
-      details: ["Shravya@kuvaira.in"]
+      content: (
+        <a href="mailto:shravya@kuvaira.in" className="text-muted-foreground hover:text-primary transition-colors">
+          shravya@kuvaira.in
+        </a>
+      )
     }
   ];
 
@@ -42,9 +49,9 @@ const Contact = () => {
       <section className="pt-40 pb-20 bg-pastel-peach/10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-serif font-semibold mb-6">Contact Us</h1>
+            <h1 className="text-4xl md:text-6xl font-serif font-semibold mb-6">Start Your Gifting Journey</h1>
             <p className="text-lg text-muted-foreground">
-              Get in touch with our team to discuss your corporate gifting needs.
+              Tell us who you're gifting and why—we'll take care of the rest.
             </p>
           </div>
         </div>
@@ -78,12 +85,8 @@ const Contact = () => {
                       {item.icon}
                       <h3 className="font-medium text-lg">{item.title}</h3>
                     </div>
-                    <div className="space-y-1">
-                      {item.details.map((detail, i) => (
-                        <p key={i} className="text-muted-foreground">
-                          {detail}
-                        </p>
-                      ))}
+                    <div className="text-muted-foreground">
+                      {item.content}
                     </div>
                   </div>
                 ))}

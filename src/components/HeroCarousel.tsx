@@ -1,150 +1,114 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { MessageCircle, Phone } from 'lucide-react';
 
-
-
-const primaryButtonAction = () => {
-  const portfolioSection = document.getElementById('portfolio-section');
-  if (portfolioSection) {
-    portfolioSection.scrollIntoView({ behavior: 'smooth' });
-  }
-};
-
-const secondaryButtonAction = () => {
-  const contactSection = document.getElementById('contact-section');
-  if (contactSection) {
-    contactSection.scrollIntoView({ behavior: 'smooth' });
-  }
-};
-
-const heroSlides = [
-  {
-    image: '/images/banner1.jpg',
-    line1: 'Gifts that get remembered.',
-    line2: 'Make every moment unforgettable with our curated selection.',
-    primaryButton: { text: 'Explore Collection', action: primaryButtonAction },
-    secondaryButton: { text: 'Contact Us', action: secondaryButtonAction }
-  },
-  {
-    image: '/images/banner2.jpg',
-    line1: 'Start Gifting Thoughtfully',
-    line2: 'Find the perfect expression of your appreciation and love.',
-    primaryButton: { text: 'Explore Collection', action: primaryButtonAction },
-    secondaryButton: { text: 'Contact Us', action: secondaryButtonAction }
-  },
-  {
-    image: '/images/banner3.jpg',
-    line1: 'Gifts that feel personal.',
-    line2: 'Customized touches that make your thoughtful gesture unique.',
-    primaryButton: { text: 'Explore Collection', action: primaryButtonAction },
-    secondaryButton: { text: 'Contact Us', action: secondaryButtonAction }
-  }
-];
-
-const HeroCarousel = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 6000);
-
-    return () => clearInterval(interval);
-  }, [currentSlide]);
-
-  const handleImageLoad = () => {
-    setIsLoading(false);
+const Hero = () => {
+  const scrollToContact = () => {
+    document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div className="relative w-full h-screen overflow-x-hidden">
-      {/* Carousel slides */}
-      {heroSlides.map((slide, index) => (
-        <div
-          key={index}
-          style={{ transform: `translateX(${(index - currentSlide) * 100}%)` }}
-          className="absolute inset-0 w-full h-full transition-transform duration-500 ease-out"
-        >
-          {/* Background Image with overlay */}
-          <div className="absolute inset-0 bg-black/30 z-10"></div>
-          <img
-            src={slide.image}
-            alt={slide.line1}
-            className="w-full h-full object-cover"
-            onLoad={handleImageLoad}
-          />
+    <div className="relative w-full min-h-screen overflow-hidden" id="home-section">
+      {/* Hero image */}
+      <img
+        src="/images/hero-corporate-gifts.jpeg"
+        alt="Premium corporate gifting by Kuvaira"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
 
-          {/* Content */}
-          <div className="absolute inset-0 z-20 flex items-center justify-center text-white p-6">
-            <div className="max-w-4xl text-center space-y-5 md:space-y-6">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold leading-tight animate-slide-up">
-                {slide.line1}
-              </h1>
-              {slide.line2 && (
-                <p className="text-xl md:text-2xl lg:text-3xl font-serif font-medium opacity-95 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-                  {slide.line2}
-                </p>
-              )}
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 animate-slide-up" style={{ animationDelay: '0.25s' }}>
-                <button onClick={slide.primaryButton.action} className="btn-primary min-w-[200px]">
-                  {slide.primaryButton.text}
-                </button>
-                <button className="btn-outline border-white text-white hover:bg-white hover:text-primary min-w-[180px]" onClick={slide.secondaryButton.action}>
-                  {slide.secondaryButton.text}
-                </button>
-              </div>
-            </div>
-          </div>
+      {/* Layered gradient overlay — warm dark at bottom, cooler at top */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/38 to-black/65 z-10" />
+
+      {/* Subtle vignette */}
+      <div
+        className="absolute inset-0 z-10"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.35) 100%)',
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-20 min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-20">
+        <div className="max-w-4xl mx-auto text-center">
+
+          {/* Eyebrow label */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-white/55 text-xs font-medium tracking-[0.28em] uppercase mb-8"
+          >
+            Kuvaira — A Signature Touch
+          </motion.p>
+
+          {/* Main headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.35 }}
+            className="font-serif text-[2.8rem] sm:text-6xl md:text-7xl lg:text-[5rem] font-bold text-white leading-[1.06] tracking-tight mb-8"
+          >
+            Need gifting for your
+            <br />
+            <em className="not-italic font-normal text-white/88">team, clients,</em>
+            <br />
+            or event?
+          </motion.h1>
+
+          {/* Subheading */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.58 }}
+            className="text-white/68 text-xl md:text-2xl font-light leading-relaxed mb-12 max-w-lg mx-auto"
+          >
+            Tell us the occasion.
+            <br />
+            We'll handle the rest.
+          </motion.p>
+
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.75 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <button
+              onClick={scrollToContact}
+              className="btn-glass gap-2.5 min-w-[172px]"
+            >
+              <Phone size={15} />
+              Let's Talk
+            </button>
+            <a
+              href="https://wa.me/916304408747"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline-glass gap-2.5 min-w-[172px]"
+            >
+              <MessageCircle size={15} />
+              WhatsApp Us
+            </a>
+          </motion.div>
         </div>
-      ))}
-
-      {/* Navigation buttons */}
-      <button
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all"
-        onClick={prevSlide}
-      >
-        <ChevronLeft size={24} />
-      </button>
-      <button
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all"
-        onClick={nextSlide}
-      >
-        <ChevronRight size={24} />
-      </button>
-
-      {/* Indicators */}
-      <div className="absolute bottom-8 left-0 right-0 z-30 flex justify-center space-x-3">
-        {heroSlides.map((_, index) => (
-          <button
-            key={index}
-            className={`w-3 h-3 rounded-full transition-all ${currentSlide === index
-                ? "bg-white w-10"
-                : "bg-white/50"
-              }`}
-            onClick={() => setCurrentSlide(index)}
-          />
-        ))}
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.6 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 pointer-events-none"
+      >
+        <span className="text-white/35 text-[10px] tracking-[0.25em] uppercase font-medium">
+          Scroll
+        </span>
+        <div className="w-px h-10 bg-gradient-to-b from-white/35 to-transparent" />
+      </motion.div>
     </div>
   );
 };
 
-export default HeroCarousel;
+export default Hero;

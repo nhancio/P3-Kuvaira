@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Gift } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, MessageCircle, Phone } from 'lucide-react';
+
+const navLinks = [
+  { label: 'Home', id: 'home-section' },
+  { label: 'Occasions', id: 'occasions-section' },
+  { label: 'How It Works', id: 'how-it-works-section' },
+  { label: 'About', id: 'about-section' },
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,137 +16,151 @@ const Navbar = () => {
   const location = useLocation();
 
   const scrollToSection = (sectionId: string) => {
+    setIsOpen(false);
     if (location.pathname !== '/') {
-      // If not on home page, navigate to home first
       navigate('/', { state: { scrollTo: sectionId } });
     } else {
-      // If already on home page, just scroll
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
-        setIsOpen(false);
       }
     }
   };
 
-  // Listen for navigation state containing scroll target
   useEffect(() => {
-    if (location.state && location.state.scrollTo) {
-      const sectionId = location.state.scrollTo;
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-        // Clear the state after scrolling
-        navigate(location.pathname, { replace: true, state: {} });
-      }
+    if (location.state && (location.state as { scrollTo?: string }).scrollTo) {
+      const sectionId = (location.state as { scrollTo: string }).scrollTo;
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+          navigate(location.pathname, { replace: true, state: {} });
+        }
+      }, 150);
     }
   }, [location]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md ${
-        isScrolled 
-          ? 'py-3 bg-white/90 shadow-lg' 
-          : 'py-6 bg-gradient-to-b from-black/20 to-transparent'
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? 'py-3 bg-[#FAF8F4]/92 backdrop-blur-2xl shadow-sm border-b border-[#D9D0C7]/40'
+          : 'py-5 bg-transparent'
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex justify-between items-center">
-          <Link 
-            to="/" 
-            className="flex items-center space-x-2 text-primary hover:opacity-90 transition-opacity"
-          >
-            <img 
-              src="/logo/3.png" 
-              alt="Kuvaira Logo" 
-              className="h-12 w-auto"
-            />
-            <span className="text-2xl font-serif font-bold text-black">Kuvaira</span>
-          </Link>
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        <div className="flex items-center justify-between">
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-2">
-            <button 
-              onClick={() => scrollToSection('home-section')}
-              className="px-4 py-2 rounded-full text-black hover:bg-black/10 transition-all duration-300"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection('portfolio-section')}
-              className="px-4 py-2 rounded-full text-black hover:bg-black/10 transition-all duration-300"
-            >
-              Portfolio
-            </button>
-            <button 
-              onClick={() => scrollToSection('about-section')}
-              className="px-4 py-2 rounded-full text-black hover:bg-black/10 transition-all duration-300"
-            >
-              About Us
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact-section')}
-              className="px-4 py-2 rounded-full text-black hover:bg-black/10 transition-all duration-300"
-            >
-              Contact Us
-            </button>
+          {/* Logo */}
+          <button
+            onClick={() => scrollToSection('home-section')}
+            className="flex items-center gap-3 group"
+          >
+            <img src="/logo/3.png" alt="Kuvaira" className="h-9 w-auto" />
+            <div className="leading-none">
+              <span
+                className={`block text-[1.2rem] font-serif font-bold tracking-tight transition-colors duration-400 ${
+                  isScrolled ? 'text-[#111111]' : 'text-white'
+                }`}
+              >
+                Kuvaira
+              </span>
+              <span
+                className={`block text-[9px] tracking-[0.22em] uppercase font-medium transition-colors duration-400 ${
+                  isScrolled ? 'text-[#111111]/45' : 'text-white/55'
+                }`}
+              >
+                A Signature Touch
+              </span>
+            </div>
+          </button>
+
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
+                  isScrolled
+                    ? 'text-[#111111]/65 hover:text-[#111111] hover:bg-[#EEE8E0]'
+                    : 'text-white/75 hover:text-white hover:bg-white/12'
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
           </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden focus:outline-none text-black" // Changed from text-white to text-black
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href="https://wa.me/916304408747"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                isScrolled
+                  ? 'bg-[#111111] text-[#FAF8F4] hover:bg-[#1e1e1e] shadow-md hover:shadow-lg'
+                  : 'btn-glass'
+              }`}
+            >
+              <MessageCircle size={14} />
+              Let's Talk
+            </a>
+          </div>
+
+          {/* Mobile hamburger */}
+          <button
+            className={`md:hidden p-2 rounded-full transition-colors ${
+              isScrolled ? 'text-[#111111]' : 'text-white'
+            }`}
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
-        <div 
-          className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-            isOpen 
-              ? 'max-h-screen opacity-100 py-6' 
-              : 'max-h-0 opacity-0 py-0'
+        {/* Mobile drawer */}
+        <div
+          className={`md:hidden transition-all duration-350 overflow-hidden ${
+            isOpen ? 'max-h-[500px] opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="flex flex-col space-y-4 mt-4">
-            <button 
-              onClick={() => scrollToSection('home-section')}
-              className="px-4 py-2 rounded-md text-black hover:bg-black/10 transition-all duration-300"
-            >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection('portfolio-section')}
-              className="px-4 py-2 rounded-md text-black hover:bg-black/10 transition-all duration-300"
-            >
-              Portfolio
-            </button>
-            <button 
-              onClick={() => scrollToSection('about-section')}
-              className="px-4 py-2 rounded-md text-black hover:bg-black/10 transition-all duration-300"
-            >
-              About Us
-            </button>
-            <button 
-              onClick={() => scrollToSection('contact-section')}
-              className="px-4 py-2 rounded-md text-black hover:bg-black/10 transition-all duration-300"
-            >
-              Contact Us
-            </button>
+          <div className="glass-card rounded-2xl p-5 space-y-1">
+            {[...navLinks, { label: 'Contact', id: 'contact-section' }].map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className="w-full text-left px-4 py-3 text-[#111111] text-sm font-medium rounded-xl hover:bg-[#EEE8E0] transition-colors"
+              >
+                {link.label}
+              </button>
+            ))}
+            <div className="pt-3 flex flex-col gap-2.5">
+              <a
+                href="https://wa.me/916304408747"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 px-5 py-3 bg-[#111111] text-[#FAF8F4] rounded-full text-sm font-medium hover:bg-[#1e1e1e] transition-colors"
+              >
+                <MessageCircle size={15} />
+                WhatsApp Us
+              </a>
+              <a
+                href="tel:+916304408747"
+                className="flex items-center justify-center gap-2 px-5 py-3 border border-[#D9D0C7] text-[#111111] rounded-full text-sm font-medium hover:border-[#111111] transition-colors"
+              >
+                <Phone size={15} />
+                Call Us
+              </a>
+            </div>
           </div>
         </div>
       </div>

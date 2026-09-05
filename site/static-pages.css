@@ -1,0 +1,28 @@
+:root { --cream:#f7f4ee; --ink:#252321; --muted:#6f6961; --gold:#a6763f; --line:#ded6ca; }
+* { box-sizing:border-box; }
+html { background:var(--cream); }
+body { margin:0; background:var(--cream); color:var(--ink); font-family:Poppins, "Helvetica Neue", Arial, sans-serif; line-height:1.7; }
+a { color:inherit; }
+.static-shell { min-height:100vh; }
+.static-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; max-width:1180px; margin:0 auto; padding:2rem 2rem 1rem; }
+.static-brand { text-decoration:none; }
+.static-brand strong { display:block; font:500 1.35rem/1 "Playfair Display", Georgia, serif; letter-spacing:.2em; text-transform:uppercase; }
+.static-brand span { color:var(--gold); font:italic .78rem/1.2 "Playfair Display", Georgia, serif; }
+.static-nav { display:flex; gap:1.25rem; flex-wrap:wrap; justify-content:flex-end; color:var(--muted); font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; }
+.static-nav a { text-decoration:none; }
+.static-nav a:hover, .static-nav a:focus-visible { color:var(--gold); }
+.static-main { max-width:900px; margin:0 auto; padding:4rem 2rem 6rem; }
+.eyebrow { color:var(--gold); font-size:.72rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; }
+h1, h2 { font-family:"Playfair Display", Georgia, serif; font-weight:500; line-height:1.15; }
+h1 { max-width:760px; margin:.6rem 0 1.5rem; font-size:clamp(2.6rem, 7vw, 5rem); letter-spacing:-.02em; }
+h2 { margin:2.5rem 0 .75rem; font-size:clamp(1.45rem, 3vw, 2.1rem); }
+p, ul { color:var(--muted); }
+.intro { max-width:680px; font-size:1.08rem; }
+.updated { margin-top:-.75rem; font-size:.82rem; }
+.static-card { margin-top:2rem; padding:1.6rem 1.75rem; border:1px solid var(--line); background:rgba(255,255,255,.28); }
+.faq-item { padding:1.4rem 0; border-bottom:1px solid var(--line); }
+.faq-item:first-child { border-top:1px solid var(--line); }
+.faq-item h2 { margin:0 0 .45rem; font-size:1.25rem; }
+.faq-item p { margin:0; }
+.static-footer { border-top:1px solid var(--line); max-width:900px; margin:0 auto; padding:1.25rem 2rem 3rem; color:var(--muted); font-size:.8rem; }
+@media (max-width:640px) { .static-header { align-items:flex-start; flex-direction:column; padding:1.5rem 1.25rem 1rem; } .static-nav { justify-content:flex-start; } .static-main { padding:3rem 1.25rem 4rem; } .static-footer { padding-left:1.25rem; padding-right:1.25rem; } }

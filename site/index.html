@@ -21,6 +21,45 @@
     <meta name="twitter:description" content="Premium curated gifts designed with intention and delivered with care." />
     <meta name="twitter:image" content="https://kuvaira.in/images/hero-corporate-gifts.jpeg" />
     <link rel="alternate" type="text/plain" href="https://kuvaira.in/llms.txt" />
+    <script>
+      (() => {
+        const homeTitle = "Kuvaira | Premium Corporate & Personal Gifting";
+        const pages = {
+          "": [null, homeTitle],
+          "/about": ["about-me-section", "About Us | Kuvaira"],
+          "/process": ["process-section", "Our Process | Kuvaira"],
+          "/corporate-gifting": ["gallery-section", "Corporate Gifting | Kuvaira"],
+          "/portfolio": [null, "Collections | Kuvaira"],
+          "/contact": [null, "Contact | Kuvaira"]
+        };
+        const updatePage = (scroll) => {
+          const page = pages[window.location.pathname.replace(/\/$/, "")];
+          const section = page && page[0];
+          if (section) {
+            document.documentElement.dataset.sectionPage = section;
+          } else {
+            delete document.documentElement.dataset.sectionPage;
+          }
+          document.title = page ? page[1] : homeTitle;
+          const canonical = document.querySelector('link[rel="canonical"]');
+          const ogUrl = document.querySelector('meta[property="og:url"]');
+          const href = "https://kuvaira.in" + (page ? window.location.pathname : "/");
+          if (canonical) canonical.href = href;
+          if (ogUrl) ogUrl.content = href;
+          if (scroll) window.scrollTo({ top: 0, behavior: "instant" });
+        };
+        for (const method of ["pushState", "replaceState"]) {
+          const original = history[method];
+          history[method] = function (...args) {
+            const result = original.apply(this, args);
+            updatePage(true);
+            return result;
+          };
+        }
+        addEventListener("popstate", () => updatePage(true));
+        updatePage(false);
+      })();
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -72,6 +111,22 @@
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
+      }
+      #root > div > section#about-me-section,
+      #root > div > section#process-section,
+      #root > div > section#gallery-section { display: none; }
+      html[data-section-page] header {
+        background: rgba(247, 244, 238, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid #DDD6C8;
+      }
+      html[data-section-page] #root > div > section { display: none; }
+      html[data-section-page="about-me-section"] #root > div > section#about-me-section,
+      html[data-section-page="process-section"] #root > div > section#process-section,
+      html[data-section-page="gallery-section"] #root > div > section#gallery-section {
+        display: block;
+        min-height: 70vh;
+        padding-top: 9rem;
       }
     </style>
     <script type="module" crossorigin src="/assets/index-BxqEUz15.js"></script>

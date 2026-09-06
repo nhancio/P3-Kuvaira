@@ -11,7 +11,11 @@
 
 ## Helpful pages
 
-- [Home](https://kuvaira.in/): brand, collections, process, and enquiry paths
+- [Home](https://kuvaira.in/): brand overview, selected work, and enquiry paths
+- [About Us](https://kuvaira.in/about): who Kuvaira is and how the studio works
+- [Collections](https://kuvaira.in/portfolio): curated gift collections
+- [Corporate Gifting](https://kuvaira.in/corporate-gifting): employee, client, festive, and wedding gifting
+- [Our Process](https://kuvaira.in/process): how a gifting project runs end-to-end
 - [FAQs](https://kuvaira.in/faqs.html): answers about quantities, budgets, timelines, customisation, and delivery
 - [Contact](https://kuvaira.in/contact): start a gifting enquiry
 - [Privacy Policy](https://kuvaira.in/privacy-policy.html)
